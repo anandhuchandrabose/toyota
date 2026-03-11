@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amana Toyota — Premium Automobiles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f2ee;
+    --red: #c8102e;
+    --red-dark: #960c22;
+    --gray: #1e1e1e;
+    --gray-mid: #2e2e2e;
+    --gray-light: #888;
+    --cream: #f0ece4;
+    --gold: #c9a84c;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-serif: 'Playfair Display', serif;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--red);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(200,16,46,0.5);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.25s ease, width 0.3s, height 0.3s;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 60px;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, transparent 100%);
+    backdrop-filter: blur(4px);
+  }
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    background: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+  .logo img {
+    height: 28px;
+    width: auto;
+    display: block;
+  }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a { color: var(--gray-light); font-size: 12px; letter-spacing: 2px; text-decoration: none; text-transform: uppercase; transition: color 0.3s; }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    display: flex; gap: 16px; align-items: center;
+    font-size: 12px; letter-spacing: 1px;
+  }
+  .nav-phone { color: var(--gray-light); font-size: 12px; }
+  .btn-nav {
+    background: var(--red); color: var(--white);
+    padding: 10px 24px; font-size: 11px;
+    letter-spacing: 2px; text-transform: uppercase;
+    border: none; cursor: pointer;
+    transition: background 0.3s;
+    font-family: var(--font-body);
+  }
+  .btn-nav:hover { background: var(--red-dark); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 440px;
+    align-items: center;
+    padding: 140px 60px 80px;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(110deg, rgba(10,10,10,0.82) 0%, rgba(10,10,10,0.5) 50%, rgba(10,10,10,0.88) 100%),
+      radial-gradient(ellipse 80% 60% at 30% 60%, rgba(200,16,46,0.2) 0%, transparent 62%),
+      url("https://www.amanatoyota.com/images/showroom/cc01a/showroom.jpg") center/cover no-repeat;
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-line {
+    position: absolute;
+    top: 50%; left: 0;
+    width: 100%; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(200,16,46,0.3), transparent);
+    transform: translateY(-50%);
+  }
+  .hero-content { position: relative; z-index: 2; }
+  .hero-eyebrow {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--red); margin-bottom: 24px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 40px; height: 1px; background: var(--red);
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-size: clamp(72px, 9vw, 128px);
+    line-height: 0.9;
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+  h1 em {
+    font-style: normal;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(245,242,238,0.3);
+  }
+  .hero-sub {
+    font-size: 15px; font-weight: 300; line-height: 1.7;
+    color: var(--gray-light); max-width: 480px;
+    margin: 28px 0 48px;
+  }
+  .hero-actions { display: flex; gap: 16px; align-items: center; }
+  .btn-primary {
+    background: var(--red); color: var(--white);
+    padding: 16px 40px; font-size: 12px;
+    letter-spacing: 2px; text-transform: uppercase;
+    border: none; cursor: pointer;
+    font-family: var(--font-body);
+    transition: all 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .btn-primary::after {
+    content: ''; position: absolute; inset: 0;
+    background: var(--white); opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .btn-primary:hover::after { opacity: 0.1; }
+  .btn-outline {
+    background: transparent; color: var(--white);
+    padding: 15px 36px; font-size: 12px;
+    letter-spacing: 2px; text-transform: uppercase;
+    border: 1px solid rgba(245,242,238,0.25); cursor: pointer;
+    font-family: var(--font-body);
+    transition: all 0.3s;
+  }
+  .btn-outline:hover { border-color: var(--white); }
+
+  /* Hero form card */
+  .hero-form-card {
+    position: relative; z-index: 2;
+    background: rgba(20,20,20,0.9);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 40px;
+    backdrop-filter: blur(20px);
+  }
+  .hero-form-card::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(to right, var(--red), var(--gold));
+  }
+  .form-title {
+    font-family: var(--font-display);
+    font-size: 22px; letter-spacing: 3px;
+    margin-bottom: 6px; color: var(--white);
+  }
+  .form-sub {
+    font-size: 12px; color: var(--gray-light);
+    margin-bottom: 28px; letter-spacing: 0.5px;
+  }
+  .form-group { margin-bottom: 14px; }
+  .form-group input, .form-group select {
+    width: 100%; background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--white); padding: 13px 16px;
+    font-family: var(--font-body); font-size: 13px;
+    outline: none; transition: border-color 0.3s;
+    appearance: none;
+  }
+  .form-group input::placeholder { color: rgba(255,255,255,0.3); }
+  .form-group input:focus, .form-group select:focus { border-color: var(--red); }
+  .form-group select option { background: var(--gray); }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .btn-form {
+    width: 100%; background: var(--red); color: var(--white);
+    padding: 15px; font-size: 12px;
+    letter-spacing: 3px; text-transform: uppercase;
+    border: none; cursor: pointer;
+    font-family: var(--font-body); margin-top: 6px;
+    transition: background 0.3s;
+  }
+  .btn-form:hover { background: var(--red-dark); }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 100px 60px; }
+  .section-label {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--red); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-label::before { content: ''; width: 30px; height: 1px; background: var(--red); }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 64px);
+    letter-spacing: 2px; line-height: 1;
+    margin-bottom: 60px;
+  }
+  .section-title span { color: var(--red); }
+
+  /* ── PRODUCTS ── */
+  #products { background: var(--black); }
+  .products-header {
+    display: flex; justify-content: space-between;
+    align-items: flex-end; margin-bottom: 56px;
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+  .car-card {
+    background: var(--gray);
+    position: relative; overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .car-card:hover { transform: translateY(-6px); z-index: 2; }
+  .car-card:hover .card-overlay { opacity: 1; }
+  .car-card:hover .card-actions { transform: translateY(0); opacity: 1; }
+  .car-img {
+    width: 100%; aspect-ratio: 4/3;
+    position: relative; overflow: hidden;
+    background: #111;
+  }
+  .car-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.01);
+    transition: transform 0.5s ease;
+  }
+  .car-card:hover .car-img img { transform: scale(1.06); }
+  .card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(200,16,46,0.15), transparent);
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .car-info { padding: 18px 20px 16px; }
+  .car-name {
+    font-family: var(--font-display);
+    font-size: 18px; letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .car-price {
+    font-size: 12px; color: var(--gold);
+    letter-spacing: 1px; margin-bottom: 14px;
+  }
+  .card-actions {
+    display: flex; gap: 8px;
+    transform: translateY(10px); opacity: 0;
+    transition: all 0.3s;
+  }
+  .btn-card {
+    flex: 1; padding: 9px 8px;
+    font-size: 10px; letter-spacing: 1.5px;
+    text-transform: uppercase; border: none;
+    cursor: pointer; font-family: var(--font-body);
+    transition: all 0.3s;
+  }
+  .btn-card-primary { background: var(--red); color: var(--white); }
+  .btn-card-secondary { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.2); }
+  .btn-card-secondary:hover { border-color: var(--white); }
+  .more-btn {
+    display: block; margin: 48px auto 0;
+    background: transparent; color: var(--white);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 14px 60px; font-size: 11px;
+    letter-spacing: 3px; text-transform: uppercase;
+    cursor: pointer; font-family: var(--font-body);
+    transition: all 0.3s;
+  }
+  .more-btn:hover { background: var(--white); color: var(--black); }
+
+  /* ── TEST DRIVE + EMI ── */
+  #testdrive-emi {
+    background: var(--gray);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0; padding: 0;
+  }
+  .td-left {
+    padding: 80px 60px;
+    position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #111 0%, #1a0508 100%);
+  }
+  .td-left::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 80%, rgba(200,16,46,0.15) 0%, transparent 60%);
+  }
+  .td-img-wrap {
+    width: 100%; aspect-ratio: 16/10;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: center;
+    margin: 36px 0;
+    position: relative; overflow: hidden;
+  }
+  .td-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .td-img-wrap::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(10,10,10,0.6) 0%, transparent 50%);
+  }
+  .emi-right {
+    padding: 80px 60px;
+    background: var(--black);
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .emi-right .hero-form-card {
+    margin-top: 32px;
+  }
+
+  /* ── ABOUT / STATS ── */
+  #about {
+    background: var(--black);
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  #about::before {
+    content: 'AMANA TOYOTA';
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-display);
+    font-size: 180px; letter-spacing: 12px;
+    color: rgba(255,255,255,0.02);
+    pointer-events: none; white-space: nowrap;
+  }
+  .about-text {
+    max-width: 740px; margin: 0 auto 72px;
+    font-size: 16px; line-height: 1.9;
+    color: rgba(245,242,238,0.6);
+    position: relative; z-index: 1;
+  }
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1px; background: rgba(255,255,255,0.06);
+    max-width: 900px; margin: 0 auto 60px;
+    position: relative; z-index: 1;
+  }
+  .stat-item {
+    background: var(--black);
+    padding: 52px 40px;
+    transition: background 0.3s;
+  }
+  .stat-item:hover { background: #0f0f0f; }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 72px; letter-spacing: 0;
+    line-height: 1; color: var(--white);
+  }
+  .stat-num span { color: var(--red); }
+  .stat-label {
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gray-light); margin-top: 8px;
+  }
+  .btn-cta-center {
+    background: var(--red); color: var(--white);
+    padding: 16px 56px; font-size: 12px;
+    letter-spacing: 3px; text-transform: uppercase;
+    border: none; cursor: pointer;
+    font-family: var(--font-body);
+    transition: background 0.3s;
+    position: relative; z-index: 1;
+  }
+  .btn-cta-center:hover { background: var(--red-dark); }
+
+  /* ── KEY HANDOVER PHOTOS ── */
+  #handover {
+    background: var(--gray);
+    padding: 100px 60px;
+  }
+  .photos-track {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    margin-top: 0;
+  }
+  .photo-item {
+    aspect-ratio: 4/3;
+    background: #1a1a1a;
+    position: relative; overflow: hidden;
+    cursor: pointer;
+  }
+  .photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s ease;
+  }
+  .photo-item:hover img { transform: scale(1.06); }
+  .photo-item::after {
+    content: 'VIEW';
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-size: 16px; letter-spacing: 4px;
+    color: var(--white); opacity: 0;
+    background: rgba(200,16,46,0.7);
+    transition: opacity 0.3s;
+  }
+  .photo-item:hover::after { opacity: 1; }
+
+  /* ── SERVICE HIGHLIGHTS ── */
+  #services {
+    background: var(--black);
+    position: relative;
+  }
+  .services-intro {
+    max-width: 600px; font-size: 15px; line-height: 1.8;
+    color: rgba(245,242,238,0.55); margin-bottom: 60px;
+  }
+  .services-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+  }
+  .service-card {
+    padding: 40px 24px;
+    background: var(--gray);
+    border-bottom: 3px solid transparent;
+    transition: all 0.4s;
+    cursor: pointer;
+  }
+  .service-card:hover {
+    background: #222;
+    border-bottom-color: var(--red);
+    transform: translateY(-4px);
+  }
+  .service-icon {
+    width: 48px; height: 48px;
+    margin-bottom: 20px;
+    opacity: 0.5;
+  }
+  .service-name {
+    font-family: var(--font-display);
+    font-size: 16px; letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .service-desc {
+    font-size: 12px; line-height: 1.7;
+    color: var(--gray-light);
+  }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials {
+    background: var(--gray);
+    overflow: hidden;
+  }
+  .testimonials-slider {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px; margin-top: 60px;
+  }
+  .testimonial-card {
+    background: var(--black);
+    padding: 44px 36px;
+    position: relative;
+    border: 1px solid rgba(255,255,255,0.04);
+    transition: border-color 0.3s;
+  }
+  .testimonial-card:hover { border-color: rgba(200,16,46,0.3); }
+  .testimonial-card::before {
+    content: '"';
+    font-family: var(--font-serif);
+    font-size: 80px; color: var(--red);
+    opacity: 0.3; line-height: 1;
+    position: absolute; top: 20px; left: 28px;
+  }
+  .play-btn {
+    width: 60px; height: 60px;
+    background: rgba(200,16,46,0.15);
+    border: 2px solid var(--red);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 28px; cursor: pointer;
+    transition: all 0.3s;
+  }
+  .play-btn:hover { background: var(--red); }
+  .play-btn svg { width: 22px; margin-left: 4px; }
+  .testimonial-text {
+    font-size: 14px; line-height: 1.8;
+    color: rgba(245,242,238,0.65); margin-bottom: 28px;
+    padding-top: 16px;
+  }
+  .testimonial-author { font-size: 13px; font-weight: 500; }
+  .testimonial-role { font-size: 11px; color: var(--gray-light); margin-top: 3px; letter-spacing: 1px; }
+
+  /* ── GOOGLE REVIEWS ── */
+  #reviews {
+    background: var(--black);
+    padding: 80px 60px;
+  }
+  .reviews-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px; margin-top: 52px;
+  }
+  .review-card {
+    background: var(--gray);
+    padding: 32px 28px;
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+  .review-stars { color: var(--gold); font-size: 16px; margin-bottom: 14px; }
+  .review-text {
+    font-size: 13px; line-height: 1.8;
+    color: rgba(245,242,238,0.6); margin-bottom: 20px;
+  }
+  .reviewer { font-size: 13px; font-weight: 500; }
+  .review-date { font-size: 11px; color: var(--gray-light); margin-top: 3px; }
+
+  /* ── SHOWROOM ── */
+  #showroom {
+    background: var(--gray);
+    padding: 100px 60px;
+  }
+  .showroom-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 3px; margin-top: 52px;
+  }
+  .showroom-photo {
+    aspect-ratio: 3/4;
+    background: #1a1a1a;
+    overflow: hidden; cursor: pointer;
+    position: relative;
+  }
+  .showroom-photo:first-child {
+    grid-column: span 2; grid-row: span 2;
+    aspect-ratio: unset;
+  }
+  .showroom-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s ease;
+  }
+  .showroom-photo:hover img { transform: scale(1.05); }
+  .showroom-photo::after {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(200,16,46,0.5); opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .showroom-photo:hover::after { opacity: 1; }
+
+  /* ── LOCATIONS ── */
+  #locations { background: var(--black); }
+  .locations-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2px; margin-top: 52px;
+  }
+  .location-card {
+    background: var(--gray);
+    padding: 40px 28px;
+    border-bottom: 3px solid rgba(255,255,255,0.06);
+    transition: border-color 0.3s, background 0.3s;
+    cursor: pointer;
+  }
+  .location-card:hover { background: #222; border-bottom-color: var(--red); }
+  .loc-pin {
+    width: 40px; height: 40px; margin-bottom: 20px;
+    color: var(--red); opacity: 0.7;
+  }
+  .loc-name {
+    font-family: var(--font-display);
+    font-size: 20px; letter-spacing: 2px; margin-bottom: 10px;
+  }
+  .loc-address {
+    font-size: 12px; line-height: 1.8;
+    color: var(--gray-light);
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: linear-gradient(135deg, #0a0a0a 0%, #12020a 100%);
+    padding: 120px 60px;
+    position: relative; overflow: hidden;
+  }
+  #contact::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(to right, transparent, var(--red), transparent);
+  }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 100px; align-items: start;
+  }
+  .contact-left p {
+    font-size: 15px; line-height: 1.9;
+    color: rgba(245,242,238,0.5); margin-bottom: 48px;
+  }
+  .contact-detail {
+    margin-bottom: 24px;
+  }
+  .contact-detail-label {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--red); margin-bottom: 6px;
+  }
+  .contact-detail-value { font-size: 15px; color: var(--white); }
+  .contact-form { display: flex; flex-direction: column; gap: 14px; }
+  .contact-form textarea {
+    width: 100%; background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--white); padding: 16px;
+    font-family: var(--font-body); font-size: 13px;
+    outline: none; resize: none; height: 120px;
+    transition: border-color 0.3s;
+  }
+  .contact-form textarea:focus { border-color: var(--red); }
+  .contact-form textarea::placeholder { color: rgba(255,255,255,0.3); }
+  .contact-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .btn-send {
+    align-self: flex-end;
+    background: var(--red); color: var(--white);
+    padding: 15px 48px; font-size: 11px;
+    letter-spacing: 3px; text-transform: uppercase;
+    border: none; cursor: pointer;
+    font-family: var(--font-body); transition: background 0.3s;
+  }
+  .btn-send:hover { background: var(--red-dark); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #050505;
+    padding: 48px 60px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-links { display: flex; gap: 32px; list-style: none; }
+  .footer-links a { color: var(--gray-light); font-size: 11px; letter-spacing: 1px; text-decoration: none; text-transform: uppercase; transition: color 0.3s; }
+  .footer-links a:hover { color: var(--white); }
+  .footer-copy { font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
+  .footer-designed { font-size: 11px; color: rgba(255,255,255,0.15); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate { animation: fadeUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+  .delay-1 { animation-delay: 0.1s; opacity: 0; }
+  .delay-2 { animation-delay: 0.25s; opacity: 0; }
+  .delay-3 { animation-delay: 0.4s; opacity: 0; }
+  .delay-4 { animation-delay: 0.55s; opacity: 0; }
+  .delay-5 { animation-delay: 0.7s; opacity: 0; }
+
+  /* Scroll reveal */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--red); }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo" aria-label="Amana Toyota">
+    <img src="https://www.amanatoyota.com/images/logo.png" alt="Amana Toyota logo">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#products">Models</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#showroom">Showroom</a></li>
+    <li><a href="#locations">Locations</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-cta">
+    <span class="nav-phone">+91 79022 80000</span>
+    <button class="btn-nav">Apply Now</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-line"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow animate delay-1">Official Toyota Dealer in Kerala</div>
+    <h1 class="animate delay-2">AMANA<br>TOYOTA<br><em>KERALA</em></h1>
+    <p class="hero-sub animate delay-3">Explore Toyota models, test-drive options, and finance support inspired by Amanatoyota.com dealership experience.</p>
+    <div class="hero-actions animate delay-4">
+      <button class="btn-primary">Explore Models</button>
+      <button class="btn-outline">Book Test Drive</button>
+    </div>
+  </div>
+  <div class="hero-form-card animate delay-3">
+    <div class="form-title">KNOW MORE</div>
+    <div class="form-sub">Get personalized assistance today</div>
+    <div class="form-group"><input type="text" placeholder="Full Name"></div>
+    <div class="form-group"><input type="email" placeholder="Email Address"></div>
+    <div class="form-group"><input type="tel" placeholder="Phone Number"></div>
+    <div class="form-row">
+      <div class="form-group">
+        <select>
+          <option value="">Model</option>
+          <option>Innova Hycross</option>
+          <option>Urban Cruiser Taisor</option>
+          <option>Camry</option>
+          <option>Vellfire</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <select>
+          <option value="">Place</option>
+          <option>Calicut</option>
+          <option>Malappuram</option>
+          <option>Kannur</option>
+          <option>Palakkad</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn-form">Apply Now →</button>
+  </div>
+
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="products-header reveal">
+    <div>
+      <div class="section-label">Our Fleet</div>
+      <div class="section-title">SPOTLIGHTED<br><span>MODELS</span></div>
+    </div>
+    <p style="max-width:320px; font-size:14px; color:var(--gray-light); line-height:1.8;">
+      Choose from our curated selection of performance vehicles, each engineered to deliver an extraordinary driving experience.
+    </p>
+  </div>
+
+  <div class="products-grid reveal">
+    <!-- Row 1 -->
+    <div class="car-card">
+      <div class="car-img">
+        <img src="https://dealer.toyotabharat.com/dealerV11/images/homepage/banners/a32-teaser-banner-1920x807.jpg" alt="Toyota model highlight">
+        <div class="card-overlay"></div>
+      </div>
+      <div class="car-info">
+        <div class="car-name">SEDAN PRO</div>
+        <div class="car-price">FROM ₹ 12,50,000</div>
+        <div class="card-actions">
+          <button class="btn-card btn-card-primary">ON-ROAD</button>
+          <button class="btn-card btn-card-secondary">CHECK EMI</button>
+        </div>
+      </div>
+    </div>
+    <div class="car-card">
+      <div class="car-img">
+        <img src="https://dealer.toyotabharat.com/dealerV11/images/homepage/banners/drumtao-1920x807.jpg" alt="Toyota model highlight">
+        <div class="card-overlay"></div>
+      </div>
+      <div class="car-info">
+        <div class="car-name">COUPE GT</div>
+        <div class="car-price">FROM ₹ 18,75,000</div>
+        <div class="card-actions">
+          <button class="btn-card btn-card-primary">ON-ROAD</button>
+          <button class="btn-card btn-card-secondary">CHECK EMI</button>
+        </div>
+      </div>
+    </div>
+    <div class="car-card">
+      <div class="car-img">
+        <img src="https://dealer.toyotabharat.com/dealerV11/images/homepage/banners/home-banner-1920x807.jpg" alt="Toyota model highlight">
+        <div class="card-overlay"></div>
+      </div>
+      <div class="car-info">
+        <div class="car-name">SUV ELITE</div>
+        <div class="car-price">FROM ₹ 24,90,000</div>
+        <div class="card-actions">
+          <button class="btn-card btn-card-primary">ON-ROAD</button>
+          <button class="btn-card btn-card-secondary">CHECK EMI</button>
+        </div>
+      </div>
+    </div>
+    <div class="car-card">
+      <div class="car-img">
+        <img src="https://dealer.toyotabharat.com/dealerV11/images/homepage/banners/elegance-at-every-glance-camry-1920x807.jpg" alt="Toyota model highlight">
+        <div class="card-overlay"></div>
+      </div>
+      <div class="car-info">
+        <div class="car-name">HATCH S</div>
+        <div class="car-price">FROM ₹ 8,40,000</div>
+        <div class="card-actions">
+          <button class="btn-card btn-card-primary">ON-ROAD</button>
+          <button class="btn-card btn-card-secondary">CHECK EMI</button>
+        </div>
+      </div>
+    </div>
+    <!-- Row 2 -->
+    <div class="car-card">
+      <div class="car-img">
+        <img src="https://dealer.toyotabharat.com/dealerV11/images/homepage/banners/urban-cruiser-taisor-homepage-banner-1920x807.jpg" alt="Toyota model highlight">
+        <div class="card-overlay"></div>
+      </div>
+      <div class="car-info"><div class="car-name">SPORT X</div><div class="car-price">FROM ₹ 32,00,000</div><div class="card-actions"><button class="btn-card btn-card-primary">ON-ROAD</button><button class="btn-card btn-card-secondary">CHECK EMI</button></div></div>
+    </div>
+    <div class="car-card">
+      <div class="car-img">
+        <img src="https://dealer.toyotabharat.com/dealerV11/images/homepage/banners/lc-300-home-banner-1920x807.jpg" alt="Toyota model highlight">
+        <div class="card-overlay"></div>
+      </div>
+      <div class="car-info"><div class="car-name">TURBO RS</div><div class="car-price">FROM ₹ 45,20,000</div><div class="card-actions"><button class="btn-card btn-card-primary">ON-ROAD</button><button class="btn-card btn-card-secondary">CHECK EMI</button></div></div>
+    </div>
+    <div class="car-card">
+      <div class="car-img">
+        <img src="https://dealer.toyotabharat.com/dealerV11/images/homepage/banners/vellfire-homepage-banner-1920x807.jpg" alt="Toyota model highlight">
+        <div class="card-overlay"></div>
+      </div>
+      <div class="car-info"><div class="car-name">EV PRIME</div><div class="car-price">FROM ₹ 28,50,000</div><div class="card-actions"><button class="btn-card btn-card-primary">ON-ROAD</button><button class="btn-card btn-card-secondary">CHECK EMI</button></div></div>
+    </div>
+    <div class="car-card">
+      <div class="car-img">
+        <img src="https://dealer.toyotabharat.com/dealerV11/images/homepage/banners/new-innova-crysta-banner-1920x807.jpg" alt="Toyota model highlight">
+        <div class="card-overlay"></div>
+      </div>
+      <div class="car-info"><div class="car-name">LUXURY L</div><div class="car-price">FROM ₹ 62,00,000</div><div class="card-actions"><button class="btn-card btn-card-primary">ON-ROAD</button><button class="btn-card btn-card-secondary">CHECK EMI</button></div></div>
+    </div>
+  </div>
+  <button class="more-btn reveal">View All Models</button>
+</section>
+
+<!-- TEST DRIVE + EMI -->
+<div id="testdrive-emi">
+  <div class="td-left reveal">
+    <div class="section-label">Experience It</div>
+    <div class="section-title" style="font-size:clamp(32px,4vw,52px)">BOOK YOUR<br><span>TEST DRIVE</span></div>
+    <p style="color:var(--gray-light); font-size:14px; line-height:1.8; max-width:380px;">
+      Nothing compares to the feel of the road beneath you. Schedule a personalized test drive at your convenience.
+    </p>
+    <div class="td-img-wrap">
+      <img src="https://www.amanatoyota.com/images/showroom/ka01a/showroom.jpg" alt="Amana Toyota showroom exterior">
+    </div>
+    <button class="btn-primary" style="padding:15px 44px;">Book Test Drive →</button>
+  </div>
+  <div class="emi-right reveal">
+    <div class="section-label">Finance</div>
+    <div class="section-title" style="font-size:clamp(28px,3.5vw,44px)">GET YOUR<br><span>EMI ESTIMATE</span></div>
+    <p style="color:var(--gray-light); font-size:13px; line-height:1.8; margin-bottom:8px;">Fill in your details and get a personalised EMI plan tailored to your budget.</p>
+    <div class="hero-form-card">
+      <div class="form-title">KNOW MORE</div>
+      <div class="form-sub">Quick &amp; easy financing options</div>
+      <div class="form-group"><input type="text" placeholder="Full Name"></div>
+      <div class="form-group"><input type="email" placeholder="Email Address"></div>
+      <div class="form-group"><input type="tel" placeholder="Phone Number"></div>
+      <div class="form-row">
+        <div class="form-group"><select><option>Model</option><option>Innova Hycross</option><option>Urban Cruiser Taisor</option><option>Camry</option></select></div>
+        <div class="form-group"><select><option>Place</option><option>Calicut</option><option>Malappuram</option><option>Kannur</option></select></div>
+      </div>
+      <button class="btn-form">Apply Now →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label reveal" style="justify-content:center;">Our Story</div>
+  <div class="section-title reveal" style="margin-bottom:36px;">ABOUT <span>US</span></div>
+  <p class="about-text reveal">
+    We have been at the forefront of the automotive industry since our founding — delivering world-class vehicles, exceptional service, and unforgettable ownership experiences. Our philosophy is simple: every customer deserves to drive their dream.
+  </p>
+  <div class="stats-grid reveal">
+    <div class="stat-item">
+      <div class="stat-num">10000<span>+</span></div>
+      <div class="stat-label">Happy Customers</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">24<span>/7</span></div>
+      <div class="stat-label">Customer Support</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">1999<span>+</span></div>
+      <div class="stat-label">Awards Won</div>
+    </div>
+  </div>
+  <button class="btn-cta-center reveal">Call To Action</button>
+</section>
+
+<!-- KEY HANDOVER -->
+<section id="handover">
+  <div class="section-label reveal">Milestones</div>
+  <div class="section-title reveal">KEY HANDOVER<br><span>PHOTOS</span></div>
+  <div class="photos-track reveal">
+    <div class="photo-item">
+      <img src="https://www.amanatoyota.com/images/showroom/cc01a/showroom.jpg" alt="Amana Toyota Calicut showroom">
+    </div>
+    <div class="photo-item">
+      <img src="https://www.amanatoyota.com/images/showroom/ml01a/showroom.jpg" alt="Amana Toyota Malappuram showroom">
+    </div>
+    <div class="photo-item">
+      <img src="https://www.amanatoyota.com/images/showroom/te01a/showroom.jpg" alt="Amana Toyota Tirur showroom">
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label reveal">What We Offer</div>
+  <div class="section-title reveal">SERVICE<br><span>HIGHLIGHTS</span></div>
+  <p class="services-intro reveal">We provide comprehensive automotive solutions from purchase to maintenance — ensuring your vehicle always performs at its best.</p>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" stroke="#c8102e" stroke-width="2"/><path d="M16 24 L22 30 L32 18" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="service-name">PRE-SALES</div>
+      <div class="service-desc">Expert consultation to find your perfect match from our curated fleet.</div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none"><rect x="8" y="16" width="32" height="20" rx="3" stroke="#c8102e" stroke-width="2"/><path d="M16 16 V12 H32 V16" stroke="#c8102e" stroke-width="2"/><path d="M24 22 V30" stroke="white" stroke-width="2"/></svg>
+      <div class="service-name">FINANCING</div>
+      <div class="service-desc">Flexible EMI options and instant loan approvals with competitive rates.</div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none"><path d="M24 8 L36 14 V26 C36 32 30 38 24 40 C18 38 12 32 12 26 V14 Z" stroke="#c8102e" stroke-width="2"/><path d="M19 24 L22 27 L29 20" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="service-name">INSURANCE</div>
+      <div class="service-desc">Comprehensive coverage plans to protect your prized possession.</div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="14" stroke="#c8102e" stroke-width="2"/><path d="M24 10 V24 L32 28" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+      <div class="service-name">SERVICE</div>
+      <div class="service-desc">Scheduled maintenance and certified technicians for peak performance.</div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none"><path d="M12 32 L24 12 L36 32 Z" stroke="#c8102e" stroke-width="2"/><circle cx="24" cy="28" r="4" fill="#c8102e"/></svg>
+      <div class="service-name">EXCHANGE</div>
+      <div class="service-desc">Best-in-market exchange value for your existing vehicle upgrade.</div>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:52px;">
+    <button class="btn-cta-center reveal">Explore Services</button>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-label reveal">Real Stories</div>
+  <div class="section-title reveal">CUSTOMER<br><span>TESTIMONIALS</span></div>
+  <div class="testimonials-slider reveal">
+    <div class="testimonial-card">
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+      </div>
+      <p class="testimonial-text">The team made buying my first car an incredible experience. From the test drive to the key handover, every moment felt special and personal.</p>
+      <div class="testimonial-author">Arjun Mehta</div>
+      <div class="testimonial-role">Software Engineer, Mumbai</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+      </div>
+      <p class="testimonial-text">Exceptional service and transparency throughout the financing process. Got the best EMI deal I could find. Highly recommend the SUV Elite model.</p>
+      <div class="testimonial-author">Priya Sharma</div>
+      <div class="testimonial-role">Entrepreneur, Delhi</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="play-btn">
+        <svg viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg>
+      </div>
+      <p class="testimonial-text">24/7 support is not just a tagline here — they genuinely assisted me at midnight when I had a query about my vehicle's service schedule.</p>
+      <div class="testimonial-author">Kavita Nair</div>
+      <div class="testimonial-role">Doctor, Bangalore</div>
+    </div>
+  </div>
+</section>
+
+<!-- GOOGLE REVIEWS -->
+<section id="reviews">
+  <div class="section-label reveal">Google Reviews</div>
+  <div class="section-title reveal">WHAT CLIENTS<br><span>ARE SAYING</span></div>
+  <div class="reviews-grid reveal">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Absolutely amazing experience from start to finish. The staff was knowledgeable, patient, and genuinely cared about finding me the right vehicle.</p>
+      <div class="reviewer">Rahul D.</div>
+      <div class="review-date">2 weeks ago · Google Review</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Best dealership in the city. The showroom is beautiful, test drives are available instantly, and the after-sales service is truly world-class.</p>
+      <div class="reviewer">Sneha K.</div>
+      <div class="review-date">1 month ago · Google Review</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★☆</div>
+      <p class="review-text">Great selection of vehicles and very competitive pricing. The financing team helped me get a plan that fit my budget perfectly. Will return!</p>
+      <div class="reviewer">Vikram P.</div>
+      <div class="review-date">3 weeks ago · Google Review</div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWROOM -->
+<section id="showroom">
+  <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:0;">
+    <div>
+      <div class="section-label reveal">Gallery</div>
+      <div class="section-title reveal">SHOW ROOM<br><span>PHOTOS</span></div>
+    </div>
+    <button class="btn-outline reveal" style="margin-bottom:16px;">View All</button>
+  </div>
+  <div class="showroom-grid reveal">
+    <div class="showroom-photo">
+      <img src="https://www.amanatoyota.com/images/showroom/cc01d/showroom.jpg" alt="Amana Toyota West Hill showroom">
+    </div>
+    <div class="showroom-photo"><img src="https://www.amanatoyota.com/images/showroom/pl01a/showroom.jpg" alt="Amana Toyota Palakkad showroom"></div>
+    <div class="showroom-photo"><img src="https://www.amanatoyota.com/images/showroom/ke01a/showroom.jpg" alt="Amana Toyota Wayanad showroom"></div>
+    <div class="showroom-photo"><img src="https://www.amanatoyota.com/images/showroom/ks01a/showroom.jpg" alt="Amana Toyota Kasaragod showroom"></div>
+    <div class="showroom-photo"><img src="https://www.amanatoyota.com/images/showroom/vd01a/showroom.jpg" alt="Amana Toyota Vadakara showroom"></div>
+  </div>
+  <div style="text-align:center; margin-top:48px;">
+    <button class="btn-cta-center reveal">Schedule a Visit</button>
+  </div>
+</section>
+
+<!-- LOCATIONS -->
+<section id="locations">
+  <div class="section-label reveal">Find Us</div>
+  <div class="section-title reveal">OUR<br><span>LOCATIONS</span></div>
+  <div class="locations-grid reveal">
+    <div class="location-card">
+      <svg class="loc-pin" viewBox="0 0 40 48" fill="none"><path d="M20 4C12.268 4 6 10.268 6 18C6 28 20 44 20 44C20 44 34 28 34 18C34 10.268 27.732 4 20 4Z" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="20" cy="18" r="5" stroke="currentColor" stroke-width="2"/></svg>
+      <div class="loc-name">CALICUT</div>
+      <div class="loc-address">VPK Motors Pvt. Ltd., NH 17,<br>Cheruvannur, Kolathara PO,<br>Calicut (Kozhikode)-673655<br><br>+91 79022 80000</div>
+    </div>
+    <div class="location-card">
+      <svg class="loc-pin" viewBox="0 0 40 48" fill="none"><path d="M20 4C12.268 4 6 10.268 6 18C6 28 20 44 20 44C20 44 34 28 34 18C34 10.268 27.732 4 20 4Z" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="20" cy="18" r="5" stroke="currentColor" stroke-width="2"/></svg>
+      <div class="loc-name">MALAPPURAM</div>
+      <div class="loc-address">VPK Motors Pvt. Ltd., NH 213,<br>PO. Ramapuram, Panangangara,<br>Mallapuram-679350<br><br>+91 79022 80000</div>
+    </div>
+    <div class="location-card">
+      <svg class="loc-pin" viewBox="0 0 40 48" fill="none"><path d="M20 4C12.268 4 6 10.268 6 18C6 28 20 44 20 44C20 44 34 28 34 18C34 10.268 27.732 4 20 4Z" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="20" cy="18" r="5" stroke="currentColor" stroke-width="2"/></svg>
+      <div class="loc-name">KANNUR</div>
+      <div class="loc-address">VPK Motors Pvt. Ltd.,<br>Thottada PO,<br>Kannur-670007<br><br>+91 79022 80000</div>
+    </div>
+    <div class="location-card">
+      <svg class="loc-pin" viewBox="0 0 40 48" fill="none"><path d="M20 4C12.268 4 6 10.268 6 18C6 28 20 44 20 44C20 44 34 28 34 18C34 10.268 27.732 4 20 4Z" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="20" cy="18" r="5" stroke="currentColor" stroke-width="2"/></svg>
+      <div class="loc-name">PALAKKAD</div>
+      <div class="loc-address">VPK Motors Pvt. Ltd., 7/749,<br>NH 966, Poriyani, Mundur PO,<br>Palakkad-678592<br><br>+91 79022 80000</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-left reveal">
+      <div class="section-label">Let's Talk</div>
+      <div class="section-title" style="margin-bottom:28px;">GET IN<br><span>TOUCH</span></div>
+      <p>We'd love to hear from you. Whether you have a question about a model, financing options, or want to book a test drive — our team is ready to help.</p>
+      <div class="contact-detail">
+        <div class="contact-detail-label">Phone</div>
+        <div class="contact-detail-value">+91 79022 80000</div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">Email</div>
+        <div class="contact-detail-value">vpkmotors@amanatoyota.com</div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">Working Hours</div>
+        <div class="contact-detail-value">Service: 9:00 AM – 6:00 PM (Sunday Holiday)</div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="contact-form">
+        <textarea placeholder="Your message..."></textarea>
+        <div class="contact-form-row">
+          <input type="email" placeholder="Email Address" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); color:var(--white); padding:13px 16px; font-family:var(--font-body); font-size:13px; outline:none; transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+          <input type="text" placeholder="Full Name" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); color:var(--white); padding:13px 16px; font-family:var(--font-body); font-size:13px; outline:none; transition:border-color 0.3s;" onfocus="this.style.borderColor='var(--red)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
+        </div>
+        <button class="btn-send">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="logo" aria-label="Amana Toyota">
+    <img src="https://www.amanatoyota.com/images/logo.png" alt="Amana Toyota logo">
+  </a>
+  <ul class="footer-links">
+    <li><a href="#">Privacy Policy</a></li>
+    <li><a href="#">Terms of Service</a></li>
+    <li><a href="#">Sitemap</a></li>
+    <li><a href="#">Careers</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Amana Toyota. All rights reserved.</div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursor.style.transform = `translate(${mouseX - 6}px, ${mouseY - 6}px)`;
+  });
+
+  function animateRing() {
+    ringX += (mouseX - ringX - 18) * 0.12;
+    ringY += (mouseY - ringY - 18) * 0.12;
+    ring.style.transform = `translate(${ringX}px, ${ringY}px)`;
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('button, a, .car-card, .service-card, .location-card').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform += ' scale(1.5)';
+      ring.style.width = '56px'; ring.style.height = '56px';
+    });
+    el.addEventListener('mouseleave', () => {
+      ring.style.width = '36px'; ring.style.height = '36px';
+    });
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.transitionDelay = `${(i % 4) * 0.1}s`;
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Card actions always visible on touch
+  document.querySelectorAll('.car-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const actions = card.querySelector('.card-actions');
+      if (actions) { actions.style.transform = 'translateY(0)'; actions.style.opacity = '1'; }
+    });
+  });
+</script>
+</body>
+</html>
