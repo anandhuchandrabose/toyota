@@ -679,6 +679,102 @@
   .footer-copy { font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 1px; }
   .footer-designed { font-size: 11px; color: rgba(255,255,255,0.15); }
 
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1200px) {
+    nav, section, #reviews, #showroom, #contact { padding-left: 36px; padding-right: 36px; }
+    #hero { grid-template-columns: 1fr 400px; padding-left: 36px; padding-right: 36px; }
+    .services-grid { grid-template-columns: repeat(3, 1fr); }
+    .showroom-grid { grid-template-columns: repeat(4, 1fr); }
+    .locations-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 1024px) {
+    body { cursor: auto; }
+    nav {
+      flex-wrap: wrap;
+      gap: 12px 18px;
+      padding-top: 16px;
+      padding-bottom: 14px;
+    }
+    .logo img { height: 24px; }
+    .nav-links {
+      order: 3;
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+    }
+    .nav-links a { font-size: 11px; letter-spacing: 1.4px; }
+    .nav-cta { margin-left: auto; }
+
+    #hero {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding-top: 190px;
+      padding-bottom: 64px;
+    }
+    .hero-form-card { max-width: 560px; }
+    h1 { font-size: clamp(56px, 13vw, 92px); }
+    .hero-sub { max-width: 100%; }
+
+    .products-header { flex-direction: column; align-items: flex-start; gap: 18px; }
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .card-actions { transform: translateY(0); opacity: 1; }
+
+    #testdrive-emi { grid-template-columns: 1fr; }
+    .td-left, .emi-right { padding: 56px 36px; }
+
+    .stats-grid { grid-template-columns: 1fr; }
+    .photos-track { grid-template-columns: repeat(2, 1fr); }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .testimonials-slider, .reviews-grid { grid-template-columns: 1fr; }
+    .showroom-grid { grid-template-columns: repeat(3, 1fr); }
+    .showroom-photo:first-child {
+      grid-column: span 3;
+      grid-row: span 1;
+      aspect-ratio: 16 / 9;
+    }
+    .contact-grid { grid-template-columns: 1fr; gap: 44px; }
+    footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 18px;
+    }
+  }
+
+  @media (max-width: 720px) {
+    nav, section, #reviews, #showroom, #contact,
+    #hero, .td-left, .emi-right {
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+    nav { padding-top: 12px; padding-bottom: 10px; }
+    .nav-phone { display: none; }
+    .btn-nav { padding: 9px 14px; font-size: 10px; letter-spacing: 1.4px; }
+
+    .hero-eyebrow { letter-spacing: 2px; }
+    .hero-eyebrow::before { width: 24px; }
+    h1 { font-size: clamp(46px, 18vw, 68px); }
+    .hero-actions { flex-direction: column; align-items: stretch; width: 100%; }
+    .btn-primary, .btn-outline { width: 100%; text-align: center; }
+    .hero-form-card { padding: 24px 18px; }
+    .form-row { grid-template-columns: 1fr; }
+
+    .section-title { margin-bottom: 34px; font-size: clamp(30px, 12vw, 46px); }
+    .products-grid, .photos-track, .services-grid, .showroom-grid, .locations-grid { grid-template-columns: 1fr; }
+    .showroom-photo:first-child { grid-column: auto; aspect-ratio: 4 / 3; }
+    .contact-form-row { grid-template-columns: 1fr; }
+    .btn-send { align-self: stretch; }
+    .footer-links { flex-wrap: wrap; gap: 10px 16px; }
+    #about::before { font-size: 92px; letter-spacing: 6px; }
+    .stat-item { padding: 36px 24px; }
+    .stat-num { font-size: 56px; }
+  }
+
+  @media (hover: none), (pointer: coarse) {
+    .cursor, .cursor-ring { display: none !important; }
+  }
+
   /* ── ANIMATIONS ── */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(40px); }
